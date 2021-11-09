@@ -1,6 +1,6 @@
 function handleOnLoad() {
     //const peopleUrl = "https://localhost:5001/api/person"
-    const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person"
+    const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
     fetch(peopleUrl).then(function(response){
         return response.json();
     }).then(function(json){
