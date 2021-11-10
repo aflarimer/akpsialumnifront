@@ -1,0 +1,8 @@
+#rectangle {
+    width: 1200px;
+    height: 1200px;
+    background-color: red;
+    z-index: -1;
+    position: relative;
+    margin: 50px;
+  }
