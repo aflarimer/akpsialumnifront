@@ -73,7 +73,7 @@ function postPerson(person) {
         })
         .then((response)=>{
             console.log(response);
-            handleOnLoad();
+            document.location = "./completedform.html";
         });
     
 }
