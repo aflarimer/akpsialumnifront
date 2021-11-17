@@ -68,7 +68,7 @@
                 <form style = "padding: 15px;">
                     <div class="form-group">
                         <label for="GradSemester" style="color: black; margin-bottom: 5px; font-size: 20px;">Graduating Semester</label>
-                        <input type="password" class="form-control" id="GradSemester" placeholder="Enter Grad Semester (same format as above)">
+                        <input type="text" class="form-control" id="GradSemester" placeholder="Enter Grad Semester (same format as above)">
                     </div>
                 </form>
             </div>
@@ -82,7 +82,6 @@
                             <option value="Yes">Yes</option>
                             <option value="No">No</option>
                         </select>
-                        <!-- <input type="password" class="form-control" id="GradSchool" placeholder="Enter Major (if multiple, please list alphabetically)"> -->
                     </div>
                 </form>
             </div>
@@ -92,7 +91,82 @@
                 <form style = "padding: 15px;">
                     <div class="form-group">
                         <label for="GradSchoolName" style="color: black; margin-bottom: 5px; font-size: 20px;">If yes, where are you attending?</label>
-                        <input type="password" class="form-control" id="GradSchoolName" placeholder="Enter School Name">
+                        <input type="text" class="form-control" id="GradSchoolName" placeholder="Enter School Name">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="Employed" style="color: black; margin-bottom: 5px; font-size: 20px;">Do you have a full-time position?</label>
+                        <select id="Employed" class = "form-control">
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="Position" style="color: black; margin-bottom: 5px; font-size: 20px;">If yes, what is your position?</label>
+                        <input type="text" class="form-control" id="Position" placeholder="Enter Job Title">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="Company" style="color: black; margin-bottom: 5px; font-size: 20px;">Company of Employment</label>
+                        <input type="text" class="form-control" id="Company" placeholder="Enter Company Name">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="City" style="color: black; margin-bottom: 5px; font-size: 20px;">City of Residence</label>
+                        <input type="text" class="form-control" id="City" placeholder="Enter City">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="LinkedIn" style="color: black; margin-bottom: 5px; font-size: 20px;">Linked-In Profile Link</label>
+                        <input type="text" class="form-control" id="LinkedIn" placeholder="Enter Link">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="Email" style="color: black; margin-bottom: 5px; font-size: 20px;">Non-Crimson Email</label>
+                        <input type="text" class="form-control" id="Email" placeholder="Enter Email">
+                    </div>
+                </form>
+            </div>
+        </section>
+        <section class="jumbotron jumbotron-fluid" style="background-color: white; margin: 15px; border-radius: 10px; text-align: left;">
+            <div class="container">
+                <form style = "padding: 15px;">
+                    <div class="form-group">
+                        <label for="Phone" style="color: black; margin-bottom: 5px; font-size: 20px;">Phone Number</label>
+                        <input type="tel" id="Phone" placeholder = "Format: 123-456-7890" class = "form-control"
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                        required>
                     </div>
                 </form>
             </div>
