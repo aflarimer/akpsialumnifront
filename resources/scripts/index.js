@@ -21,16 +21,15 @@ function displayTable(json){
     var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
     if (majorsearch != "" || citysearch != "") {
         json.forEach(person => {
+            var cityRegEx = new RegExp(person.city, 'i');
+            
             if (person.major == majorsearch && person.city == citysearch) {
-                console.log(majorsearch, citysearch)
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (person.major == majorsearch && citysearch === "") {
-                console.log(majorsearch, citysearch)
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.city == citysearch && majorsearch == "") {
-                console.log(majorsearch, citysearch)
+            else if (cityRegEx.test(citysearch) && majorsearch == "") {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
