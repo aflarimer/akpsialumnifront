@@ -25,26 +25,38 @@ function displayTable(json){
 }
 
 function handleOnSubmit() {
-    var fName = document.getElementById("fName").value;
-    var lName = document.getElementById("lName").value;
-    var major = document.getElementById("major").value;
-    var city = document.getElementById("city").value;
-    var placeholder = "Not Provided";
+    var fName = document.getElementById("FirstName").value;
+    var lName = document.getElementById("LastName").value;
+    var major = document.getElementById("Major").value;
+    var minor = document.getElementById("Minor").value;
+    var pledgeClass = document.getElementById("PledgeClass").value;
+    var gradSemester = document.getElementById("GradSemester").value;
+    var gradSchool = document.getElementById("GradSchool").value;
+    var gradSchoolName = document.getElementById("GradSchoolName").value;
+    var employed = document.getElementById("Employed").value;
+    var position = document.getElementById("Position").value;
+    var company = document.getElementById("Company").value;
+    var city = document.getElementById("City").value;
+    var linkedIn = document.getElementById("LinkedIn").value;
+    var email = document.getElementById("Email").value;
+    var phone = document.getElementById("Phone").value;
 
     var person = {
         FirstName: fName,
         LastName: lName,
         Major: major,
-        Minor: placeholder,
-        PledgeClass: placeholder,
-        GraduatingSemester: placeholder,
-        GradSchool: placeholder,
-        GradSchoolName: placeholder,
-        Employed: placeholder,
-        Position: placeholder,
-        Company: placeholder,
+        Minor: minor,
+        PledgeClass: pledgeClass,
+        GraduatingSemester: gradSemester,
+        GradSchool: gradSchool,
+        GradSchoolName: gradSchoolName,
+        Employed: employed,
+        Position: position,
+        Company: company,
         City: city,
-        Email: placeholder
+        LinkedIn: linkedIn,
+        Email: email,
+        Phone: phone
     }
     postPerson(person);
 }
