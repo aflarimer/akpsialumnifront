@@ -16,9 +16,9 @@ function handleOnLoad() {
 
 function displayTable(json){
     var dataTable = document.getElementById("dataTable");
-    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>City</th></tr>";
+    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>Email</th></tr>";
     json.forEach(person => {
-        html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.major}</td><td>${person.city}</td><td>${person.email}</td></tr>`;
+        html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.email}</td></tr>`;
     });
     html+="</table>";
     dataTable.innerHTML = html;
