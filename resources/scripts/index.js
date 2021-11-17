@@ -24,10 +24,10 @@ function displayTable(json){
             if (person.major == majorsearch && person.city == citysearch) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.major == majorsearch) {
+            else if (person.major == majorsearch && citysearch == "") {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.city == citysearch) {
+            else if (person.city == citysearch && majorsearch == "") {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
