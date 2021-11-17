@@ -22,12 +22,15 @@ function displayTable(json){
     if (majorsearch != "" || citysearch != "") {
         json.forEach(person => {
             if (person.major == majorsearch && person.city == citysearch) {
+                console.log(majorsearch, citysearch)
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.major == majorsearch && citysearch == "") {
+            else if (person.major == majorsearch && citysearch === "") {
+                console.log(majorsearch, citysearch)
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (person.city == citysearch && majorsearch == "") {
+                console.log(majorsearch, citysearch)
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
