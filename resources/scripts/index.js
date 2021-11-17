@@ -16,10 +16,27 @@ function handleOnLoad() {
 
 function displayTable(json){
     var dataTable = document.getElementById("dataTable");
-    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>Email</th></tr>";
-    json.forEach(person => {
-        html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.email}</td></tr>`;
-    });
+    var citysearch = document.getElementById("citysearch").value;
+    var majorsearch = document.getElementById("majorsearch").value;
+    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
+    if (majorsearch != "" || citysearch != "") {
+        json.forEach(person => {
+            if (person.major == majorsearch && person.city == citysearch) {
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            }
+            else if (person.major == majorsearch) {
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            }
+            else if (person.major == majorsearch) {
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            }
+        });
+    }
+    else {
+        json.forEach(person => {
+            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+        });
+    }
     html+="</table>";
     dataTable.innerHTML = html;
 }
@@ -76,4 +93,8 @@ function postPerson(person) {
             document.location = "./completedform.html";
         });
     
+}
+
+function searchClick() {
+    handleOnLoad();
 }
