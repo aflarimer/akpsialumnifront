@@ -27,7 +27,7 @@ function displayTable(json){
             else if (person.major == majorsearch) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.major == majorsearch) {
+            else if (person.city == citysearch) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
