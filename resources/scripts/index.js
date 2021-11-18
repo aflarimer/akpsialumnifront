@@ -16,22 +16,20 @@ function handleOnLoad() {
 
 function displayTable(json){
     var dataTable = document.getElementById("dataTable");
-    var citysearch = document.getElementById("citysearch").value;
-    var majorsearch = document.getElementById("majorsearch").value;
+    var citysearch = document.getElementById("citysearch").value.toLowerCase();
+    var majorsearch = document.getElementById("majorsearch").value.toLowerCase();
     var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
     if (majorsearch != "" || citysearch != "") {
         // fix this omg need regex and includes
         json.forEach(person => {
-            var cityRegEx = new RegExp(person.city, 'i');
-            var majorRegEx = new RegExp(person.major, 'i');
-            let majorincludes = person.major.includes(majorsearch);
-            if (majorRegEx.test(majorsearch) && cityRegEx.test(citysearch)) {
+            
+            var cityRegEx = new RegExp(person.city.toLowerCase(), 'i');
+            var majorRegEx = new RegExp(person.major.toLowerCase(), 'i');
+            let majorincludes = person.major.toLowerCase().includes(majorsearch);
+            if (cityRegEx.test(citysearch) && majorincludes) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (majorincludes) {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
-            }
-            else if (majorRegEx.test(majorsearch) && citysearch === "" && majorincludes) {
+            else if (citysearch === "" && majorincludes) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (cityRegEx.test(citysearch) && majorsearch == "") {
