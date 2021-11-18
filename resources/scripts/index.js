@@ -20,13 +20,18 @@ function displayTable(json){
     var majorsearch = document.getElementById("majorsearch").value;
     var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
     if (majorsearch != "" || citysearch != "") {
+        // fix this omg need regex and includes
         json.forEach(person => {
             var cityRegEx = new RegExp(person.city, 'i');
-            
-            if (person.major == majorsearch && person.city == citysearch) {
+            var majorRegEx = new RegExp(person.major, 'i');
+            let majorincludes = person.major.includes(majorsearch);
+            if (majorRegEx.test(majorsearch) && cityRegEx.test(citysearch)) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (person.major == majorsearch && citysearch === "") {
+            else if (majorincludes) {
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            }
+            else if (majorRegEx.test(majorsearch) && citysearch === "" && majorincludes) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (cityRegEx.test(citysearch) && majorsearch == "") {
