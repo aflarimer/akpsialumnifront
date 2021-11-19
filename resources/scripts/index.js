@@ -20,19 +20,19 @@ function displayTable(json){
     var majorsearch = document.getElementById("majorsearch").value.toLowerCase();
     var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
     if (majorsearch != "" || citysearch != "") {
-        // fix this omg need regex and includes
         json.forEach(person => {
             
-            var cityRegEx = new RegExp(person.city.toLowerCase(), 'i');
-            var majorRegEx = new RegExp(person.major.toLowerCase(), 'i');
+            //var cityRegEx = new RegExp(person.city.toLowerCase(), 'i');
+            //var majorRegEx = new RegExp(person.major.toLowerCase(), 'i');
+            let cityincludes = person.city.toLowerCase().includes(citysearch);
             let majorincludes = person.major.toLowerCase().includes(majorsearch);
-            if (cityRegEx.test(citysearch) && majorincludes) {
+            if (cityincludes && majorincludes) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (citysearch === "" && majorincludes) {
+            else if (citysearch == "" && majorincludes) {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
-            else if (cityRegEx.test(citysearch) && majorsearch == "") {
+            else if (cityincludes && majorsearch == "") {
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
