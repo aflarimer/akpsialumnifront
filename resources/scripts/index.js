@@ -8,7 +8,7 @@ function handleOnLoad() {
     }).then(function(json){
         console.log(json);
         displayTable(json);
-
+        newMap(json);
     }).catch(function(error){
         console.log(error);
     });
@@ -102,4 +102,43 @@ function postPerson(person) {
 
 function searchClick() {
     handleOnLoad();
+}
+
+function newMap(json) {
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+        new ol.layer.Tile({
+            source: new ol.source.OSM()
+        })
+        ],
+        view: new ol.View({
+        center: ol.proj.fromLonLat([-98.12679384750024, 38.02230401901925]),
+        zoom: 3.8
+        })
+    });
+
+    const iconStyle = new ol.style.Style({
+        text: new ol.style.Text({
+            text: '\uf041',                         // fa-play, unicode f04b
+            font: '900 18px "Font Awesome 5 Free"', // font weight must be 900
+
+        })
+    });
+    
+    json.forEach(person => {
+        var longitude = person.longitude;
+        var latitude = person.latitude;
+        var layer = new ol.layer.Vector({
+            source: new ol.source.Vector({
+                features: [
+                    new ol.Feature({
+                        geometry: new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude]))
+                    })
+                ]
+            }),
+            style: iconStyle
+        });
+        map.addLayer(layer);
+    })
 }
