@@ -1,6 +1,25 @@
 //const baseUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
 //const baseUrlLocal = "https://localhost:5001/api/person";
+
 var loadNumber = 1;
+
+// document.getElementById('majorsearch').addEventListener('keyup', function (e) {
+//     if (e.code === 'Enter') {
+//         e.preventDefault();
+//         loadNumber++;
+//         searchClick();
+//     }
+// });
+
+ //these were both tests, neither work rn
+ 
+// document.getElementById('majorsearch').addEventListener("keyup", function(event) {
+//     // Number 13 is the "Enter" key on the keyboard
+//     if (event.code === 13) {
+//       event.preventDefault();
+//       document.getElementById("test").click();
+//     }
+//   });
 
 function handleOnLoad() {
     const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
