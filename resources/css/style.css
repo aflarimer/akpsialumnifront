@@ -16,3 +16,22 @@
   .table-wrapper-scroll-y {
     display: block;
   }
+
+  .map {
+    height: 400px;
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+  }
+
+  h1 {
+    font-family: 'Karla', sans-serif;
+  }
+
+  span {
+    margin-left: 10%;
+  }
+
+  nav {
+    margin-bottom: 3%;
+  }

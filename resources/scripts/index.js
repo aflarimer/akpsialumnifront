@@ -1,5 +1,6 @@
 //const baseUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
 //const baseUrlLocal = "https://localhost:5001/api/person";
+var loadNumber = 1;
 
 function handleOnLoad() {
     const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
@@ -8,7 +9,9 @@ function handleOnLoad() {
     }).then(function(json){
         console.log(json);
         displayTable(json);
-        newMap(json);
+        if (loadNumber == 1) {
+            newMap(json);
+        }
     }).catch(function(error){
         console.log(error);
     });
@@ -18,7 +21,7 @@ function displayTable(json){
     var dataTable = document.getElementById("dataTable");
     var citysearch = document.getElementById("citysearch").value.toLowerCase();
     var majorsearch = document.getElementById("majorsearch").value.toLowerCase();
-    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>LinkedIn</th><th>Email</th></tr>";
+    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>Company</th><th>LinkedIn</th><th>Email</th></tr>";
     if (majorsearch != "" || citysearch != "") {
         json.forEach(person => {
             
@@ -27,19 +30,19 @@ function displayTable(json){
             let cityincludes = person.city.toLowerCase().includes(citysearch);
             let majorincludes = person.major.toLowerCase().includes(majorsearch);
             if (cityincludes && majorincludes) {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (citysearch == "" && majorincludes) {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
             else if (cityincludes && majorsearch == "") {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
             }
         });
     }
     else {
         json.forEach(person => {
-            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
         });
     }
     html+="</table>";
@@ -101,7 +104,9 @@ function postPerson(person) {
 }
 
 function searchClick() {
+    loadNumber++;
     handleOnLoad();
+
 }
 
 function newMap(json) {
