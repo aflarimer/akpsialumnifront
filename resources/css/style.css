@@ -41,14 +41,14 @@
     background-color: rgb(71, 139, 160) !important;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    height: 220vh;
   }
   
   .form {
     background-color: #15172b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 800px;
+    height: 1450px;
     padding: 20px;
     width: 600px;
   }
@@ -114,8 +114,12 @@
     width: 50px;
   }
 
-  .cut-long {
+  .cut-medium {
     width: 175px;
+  }
+
+  .cut-long {
+    width: 225px
   }
 
   .cut-very-long {
@@ -128,7 +132,7 @@
   }
   
   .placeholder {
-    color: #65657b;
+    color: #9c9cbd;
     font-family: sans-serif;
     left: 20px;
     line-height: 14px;
@@ -144,12 +148,9 @@
   .input:not(:placeholder-shown) ~ .placeholder {
     transform: translateY(-30px) translateX(10px) scale(0.75);
   }
-  
+
+  .input:focus ~ .placeholder,
   .input:not(:placeholder-shown) ~ .placeholder {
-    color: #808097;
-  }
-  
-  .input:focus ~ .placeholder {
     color: #dc2f55;
     font-weight: bold;
   }
@@ -177,5 +178,10 @@
     background-color: #15172b;
     border: 1px solid white;
     color: white;
+  }
+
+  .form-select {
+    background-color: #303245 !important;
+    border-radius: 12px !important;
   }
   
