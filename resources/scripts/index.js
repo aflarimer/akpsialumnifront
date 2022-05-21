@@ -61,7 +61,7 @@ function displayTable(json){
     }
     else {
         json.forEach(person => {
-            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.minor}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
         });
     }
     html+="</table>";
