@@ -40,7 +40,7 @@ function displayTable(json){
     var dataTable = document.getElementById("dataTable");
     var citysearch = document.getElementById("citysearch").value.toLowerCase();
     var majorsearch = document.getElementById("majorsearch").value.toLowerCase();
-    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Major</th><th>Minor/Specialization</th><th>City</th><th>Company</th><th>LinkedIn</th><th>Email</th></tr>";
+    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Pledge Class</th><th>Major</th><th>LinkedIn</th><th>Email</th><th>City</th><th>Company</th></tr>";
     if (majorsearch != "" || citysearch != "") {
         json.forEach(person => {
             
@@ -49,19 +49,19 @@ function displayTable(json){
             let cityincludes = person.city.toLowerCase().includes(citysearch);
             let majorincludes = person.major.toLowerCase().includes(majorsearch);
             if (cityincludes && majorincludes) {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
             }
             else if (citysearch == "" && majorincludes) {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
             }
             else if (cityincludes && majorsearch == "") {
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
             }
         });
     }
     else {
         json.forEach(person => {
-            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.major}</td><td>${person.city}</td><td>${person.company}</td><td>${person.linkedIn}</td><td>${person.email}</td></tr>`;
+            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
         });
     }
     html+="</table>";
