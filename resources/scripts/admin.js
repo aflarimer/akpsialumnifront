@@ -24,18 +24,26 @@ var fieldList = ["FirstName", "Last Name", "PledgeClass", "Major", "LinkedIn", "
 //   });
 
 function handleOnLoad() {
-    const peopleUrl = "https://localhost:3001/api/person";
-    fetch(peopleUrl).then(function(response){
-        return response.json();
-    }).then(function(json){
-        console.log(json);
-        displayTable(json);
-        if (loadNumber == 1) {
-            newMap(json);
-        }
-    }).catch(function(error){
-        console.log(error);
-    });
+    if (localStorage.getItem('verified') == "true") {
+        const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
+        fetch(peopleUrl).then(function(response){
+            return response.json();
+        }).then(function(json){
+            console.log(json);
+            displayTable(json);
+            if (loadNumber == 1) {
+                newMap(json);
+            }
+        }).catch(function(error){
+            console.log(error);
+        });
+    }
+    else {
+        document.getElementById('majorSearchSubmit').style.display = "none";
+        document.getElementById('citySearchSubmit').style.display = "none";
+        alert("Please login to view this page.");
+        document.location = "./adminlogin.html";
+    }
 };
 
 function displayTable(json){
@@ -80,7 +88,7 @@ function displayTable(json){
 
 function handleOnDelete(id) {
     var personObj = {ID: id};
-    const deletePersonApiUrl = "https://localhost:3001/api/person/" + id;
+    const deletePersonApiUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person/" + id;
 
     fetch(deletePersonApiUrl, {
         method: "DELETE",
@@ -161,7 +169,7 @@ function handleTableEdit() {
 }
 
 function PutPerson(id, changeObj) {
-    const putPersonApiUrl = "https://localhost:3001/api/person/" + id;
+    const putPersonApiUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person/" + id;
 
     fetch(putPersonApiUrl, {
         method: "PUT",

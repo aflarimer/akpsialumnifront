@@ -1,5 +1,5 @@
 function handleOnSubmit() {
-    var warning = document.getElementById("delay-warning").style.display = "block";
+    var warning = document.getElementById("warning").style.display = "block";
     var fName = document.getElementById("FirstName").value;
     var lName = document.getElementById("LastName").value;
     var major = document.getElementById("Major").value;

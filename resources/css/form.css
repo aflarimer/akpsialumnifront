@@ -147,7 +147,7 @@ body {
     border-radius: 12px !important;
   }
 
-  #delay-warning {
+  #warning {
     color: red;
     margin-top: 5px; 
     margin-bottom: -25px; 
