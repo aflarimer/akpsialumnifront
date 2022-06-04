@@ -1,7 +1,9 @@
 //const baseUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
-//const baseUrlLocal = "https://localhost:5001/api/person";
+//const baseUrlLocal = "https://localhost:3001/api/person";
 
 var loadNumber = 1;
+
+var fieldList = ["FirstName", "Last Name", "PledgeClass", "Major", "LinkedIn", "Email", "City", "Company", "Delete"];
 
 // document.getElementById('majorsearch').addEventListener('keyup', function (e) {
 //     if (e.code === 'Enter') {
@@ -22,7 +24,7 @@ var loadNumber = 1;
 //   });
 
 function handleOnLoad() {
-    const peopleUrl = "https://akpsi-alumnidatabase.herokuapp.com/api/person";
+    const peopleUrl = "https://localhost:3001/api/person";
     fetch(peopleUrl).then(function(response){
         return response.json();
     }).then(function(json){
@@ -37,11 +39,12 @@ function handleOnLoad() {
 };
 
 function displayTable(json){
+    var totalPpl = 0;
     var dataTable = document.getElementById("dataTable");
     //gets what the user searched
     var citysearch = document.getElementById("citysearch").value.toLowerCase();
     var majorsearch = document.getElementById("majorsearch").value.toLowerCase();
-    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Pledge Class</th><th>Major</th><th>LinkedIn</th><th>Email</th><th>City</th><th>Company</th></tr>";
+    var html = "<table class=\"table table-striped table-light\"><tr><th>First Name</th><th>Last Name</th><th>Pledge Class</th><th>Major</th><th>LinkedIn</th><th>Email</th><th>City</th><th>Company</th><th>Delete</th></tr>";
     if (majorsearch != "" || citysearch != "") { //if the user has typed something into one of the search bars
         json.forEach(person => {
             //next 2 lines convert data from database into a common case AND compares it to what the user has searched
@@ -50,23 +53,131 @@ function displayTable(json){
             let majorincludes = person.major.toLowerCase().includes(majorsearch);
             //if statement depending on which box is used to search, or both
             if (cityincludes && majorincludes) { //if they use both search boxes at the same time
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                html+=`<tr id=${person.id}><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
             else if (citysearch == "" && majorincludes) { //if they search for major
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                html+=`<tr id=${person.id}><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
             else if (cityincludes && majorsearch == "") { //if they search for city
-                html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                html+=`<tr id=${person.id}><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
         });
     }
     else { //upon page load, when nothing is in the search bars
         json.forEach(person => {
-            html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+            html+=`<tr id=${person.id}><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td><td><button class="btn btn-danger btn-sm" onclick = "handleOnDelete(${person.id})">Delete</button></td></tr>`;
+            totalPpl++;
         });
     }
     html+="</table>";
     dataTable.innerHTML = html;
+    loadTotal(totalPpl);
+    handleTableEdit();
+}
+
+function handleOnDelete(id) {
+    var personObj = {ID: id};
+    const deletePersonApiUrl = "https://localhost:3001/api/person/" + id;
+
+    fetch(deletePersonApiUrl, {
+        method: "DELETE",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json',
+        },
+        body: JSON.stringify(personObj)
+    }).then((response)=> {
+        loadNumber++;
+        handleOnLoad();
+    })
+}
+
+function handleTableEdit() {
+    var table = document.getElementById("dataTable");
+    var rows = document.getElementsByTagName("tr");
+    var cells = document.getElementsByTagName("td");
+
+    for(var i=0; i<rows.length; i++) { //change this to 1 and the next one since don't need header row to be editable?
+        var personId = rows[i].id;
+        for(var j=0; j<rows[i].cells.length; j++) {
+            var myCell = rows[i].cells[j];
+            var column = fieldList[j];
+            myCell.setAttribute('person-id', personId);
+            myCell.setAttribute('column', column);
+        }
+    }
+
+    for(var i=0; i<cells.length; i++) {
+        if (cells[i].getAttribute('column') != "Delete") {
+            cells[i].contentEditable = true;
+            cells[i].onclick = function() {
+                if(this.hasAttribute('data-clicked')){
+                    return;
+                }
+                this.setAttribute('data-clicked', 'yes');
+                this.setAttribute('data-text', this.innerHTML);
+                var input = document.createElement('input');
+                input.setAttribute('type', 'text');
+                input.value = this.innerHTML;
+                input.style.backgroundColor = "LightGoldenRodYellow";
+
+                input.onblur = function() {
+                    var td = input.parentElement;
+                    var origText = td.getAttribute('data-text');
+                    var currentText = this.value;
+
+                    if(origText != currentText) {
+                        //make the save call
+                        td.removeAttribute('data-clicked');
+                        td.removeAttribute('data-text');
+                        var ID = td.getAttribute('person-id');
+                        var Column = td.getAttribute('column');
+                        td.innerHTML = currentText;
+                        var changeObj = {ID : ID};
+                        changeObj[Column] = currentText;
+                        PutPerson(ID, changeObj);
+                    }else{
+                        td.removeAttribute('data-clicked');
+                        td.removeAttribute('data-text');
+                        td.innerHTML = origText;
+                    }
+                }
+                
+                // input.onkeypress = function(){ //onkeypress is deprecated so find something else
+                //     if(event.keyCode == 13) {
+                //         this.blur();
+                //     }
+                // }
+
+                this.innerHTML = '';
+                this.append(input);
+                this.firstElementChild.select();
+            }
+        }
+    }
+}
+
+function PutPerson(id, changeObj) {
+    const putPersonApiUrl = "https://localhost:3001/api/person/" + id;
+
+    fetch(putPersonApiUrl, {
+        method: "PUT",
+        headers: {
+            "Accept": 'application/json',
+            "Content-Type": 'application/json',
+        },
+        body: JSON.stringify(changeObj)
+    }).then((response)=> {
+        loadNumber++;
+        handleOnLoad();
+    })
+}
+
+function loadTotal(totalPpl) {
+    document.getElementById("totalPeople").innerHTML = "Total Alumni: " + totalPpl;
 }
 
 function searchClick() {

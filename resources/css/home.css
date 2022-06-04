@@ -16,6 +16,13 @@
   .table-wrapper-scroll-y {
     display: block;
   }
+  
+  .total-amount {
+    margin-left: 40px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 25px;
+  }
 
   .map {
     height: 400px;

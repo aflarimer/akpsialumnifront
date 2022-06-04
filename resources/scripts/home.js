@@ -37,6 +37,7 @@ function handleOnLoad() {
 };
 
 function displayTable(json){
+    var totalPpl = 0;
     var dataTable = document.getElementById("dataTable");
     //gets what the user searched
     var citysearch = document.getElementById("citysearch").value.toLowerCase();
@@ -51,22 +52,31 @@ function displayTable(json){
             //if statement depending on which box is used to search, or both
             if (cityincludes && majorincludes) { //if they use both search boxes at the same time
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
             else if (citysearch == "" && majorincludes) { //if they search for major
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
             else if (cityincludes && majorsearch == "") { //if they search for city
                 html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+                totalPpl++;
             }
         });
     }
     else { //upon page load, when nothing is in the search bars
         json.forEach(person => {
             html+=`<tr><td>${person.firstName}</td><td>${person.lastName}</td><td>${person.pledgeClass}</td><td>${person.major}</td><td>${person.linkedIn}</td><td>${person.email}</td><td>${person.city}</td><td>${person.company}</td></tr>`;
+            totalPpl++;
         });
     }
     html+="</table>";
     dataTable.innerHTML = html;
+    loadTotal(totalPpl);
+}
+
+function loadTotal(totalPpl) {
+    document.getElementById("totalPeople").innerHTML = "Total Alumni: " + totalPpl;
 }
 
 function searchClick() {
